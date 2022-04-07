@@ -1,14 +1,12 @@
-# react-visual-components
+---
+nav:
+  title: Components
+  path: /components
+---
 
-## Getting Started
+## Foo
 
-Install
-
-```bash
-$ npm i react-visual-components
-```
-
-Demo
+Demo:
 
 ```tsx
 import React from 'react';
@@ -19,3 +17,5 @@ export default () => <Ruler width={600} height={20} direction="horizontal" />;
 // 垂直
 export default () => <Ruler width={20} height={600} direction="vertical" />;
 ```
+
+More skills for writing demo: https://d.umijs.org/guide/basic#write-component-demo
