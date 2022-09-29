@@ -14,8 +14,8 @@ Demo
 import React from 'react';
 import { Ruler } from 'react-visual-components';
 
-// 水平
+// horizontal ruler
 export default () => <Ruler width={600} height={20} direction="horizontal" />;
-// 垂直
+// vertical ruler
 export default () => <Ruler width={20} height={600} direction="vertical" />;
 ```

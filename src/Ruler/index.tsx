@@ -11,27 +11,24 @@ interface RulerProps {
   backgroundColor?: string;
 }
 
-const Ruler: React.FC<RulerProps> = (props) => {
+const Ruler: React.FC<RulerProps> = ({
+  direction,
+  width,
+  height,
+  style,
+  lineColor = '#404040',
+  fontColor = '#A8A8A8',
+  ...props
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const {
-    width,
-    height,
-    direction,
-    style = {},
-    className = '',
-    backgroundColor = '#15161f',
-    lineColor = '#404040',
-    fontColor = '#A8A8A8',
-  } = props;
 
   const drawRuler = useCallback(
     (element: HTMLCanvasElement, type: 'horizontal' | 'vertical') => {
-      const { offsetWidth, offsetHeight } = element;
-      element.width = offsetWidth * 2;
-      element.height = offsetHeight * 2;
+      element.width = width * 2;
+      element.height = height * 2;
 
       const step = 10;
-      const maxLength = type === 'horizontal' ? offsetWidth * 2 : offsetHeight * 2;
+      const maxLength = type === 'horizontal' ? width * 2 : height * 2;
       const ctx = element.getContext('2d');
       if (ctx) {
         ctx.strokeStyle = lineColor;
@@ -39,6 +36,7 @@ const Ruler: React.FC<RulerProps> = (props) => {
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.beginPath();
+
         for (let i = 0; i < maxLength; i += 2) {
           if (type === 'horizontal') {
             ctx.moveTo(i, 40);
@@ -92,15 +90,7 @@ const Ruler: React.FC<RulerProps> = (props) => {
     }
   }, [direction, drawRuler]);
 
-  return (
-    <canvas
-      className={className}
-      style={{ ...style, backgroundColor, width, height }}
-      // eslint-disable-next-line jsx-a11y/aria-role
-      role="ruler"
-      ref={canvasRef}
-    />
-  );
+  return <canvas style={{ ...style, width, height }} {...props} role="ruler" ref={canvasRef} />;
 };
 
 export default Ruler;

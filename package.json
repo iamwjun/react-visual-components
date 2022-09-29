@@ -1,7 +1,25 @@
 {
   "private": false,
   "name": "react-visual-components",
-  "version": "0.0.3",
+  "author": "iamk",
+  "homepage": "https://iplash.github.io/",
+  "version": "0.0.4",
+  "keywords": [
+    "TypeScript",
+    "Microsoft",
+    "compiler",
+    "language",
+    "javascript",
+    "tslib",
+    "runtime"
+  ],
+  "bugs": {
+    "url": "https://github.com/iplash/react-visual-components/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iplash/react-visual-components"
+  },
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -30,22 +48,36 @@
     ]
   },
   "dependencies": {
-    "react": "^16.12.0 || ^17.0.0"
+    "react": "^16.12.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.12.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.15.1",
-    "@testing-library/react": "^12.1.2",
-    "@types/jest": "^27.0.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@types/jest": "^29.0.3",
     "@umijs/fabric": "^2.8.1",
     "@umijs/test": "^3.0.5",
     "dumi": "^1.1.0",
     "father-build": "^1.17.2",
     "gh-pages": "^3.0.0",
+    "jest-canvas-mock": "^2.4.0",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.1",
     "yorkie": "^2.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFiles": [
+      "jest-canvas-mock"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules",
+      "<rootDir>/src/.umi",
+      "<rootDir>/src/.umi-production",
+      "__test__"
+    ]
   }
 }
