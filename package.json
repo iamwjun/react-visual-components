@@ -3,15 +3,14 @@
   "name": "react-visual-components",
   "author": "iamk",
   "homepage": "https://iplash.github.io/",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "keywords": [
-    "TypeScript",
-    "Microsoft",
-    "compiler",
-    "language",
-    "javascript",
-    "tslib",
-    "runtime"
+    "component",
+    "components",
+    "frontend",
+    "react",
+    "react-component",
+    "react-visual"
   ],
   "bugs": {
     "url": "https://github.com/iplash/react-visual-components/issues"
@@ -48,8 +47,7 @@
     ]
   },
   "dependencies": {
-    "react": "^16.12.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.12.0 || ^17.0.0 || ^18.0.0"
+    "react": "^16.12.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -63,6 +61,7 @@
     "jest-canvas-mock": "^2.4.0",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.1",
+    "react-dom": "^18.2.0",
     "yorkie": "^2.0.0"
   },
   "publishConfig": {
