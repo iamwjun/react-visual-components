@@ -4,7 +4,7 @@ nav:
   path: /components
 ---
 
-## Foo
+## Ruler
 
 Demo:
 
