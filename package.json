@@ -2,7 +2,7 @@
   "private": false,
   "name": "react-visual-components",
   "author": "iamk",
-  "homepage": "https://iplash.github.io/",
+  "homepage": "https://iamwjun.github.io/",
   "version": "0.0.5",
   "keywords": [
     "component",
@@ -13,11 +13,11 @@
     "react-visual"
   ],
   "bugs": {
-    "url": "https://github.com/iplash/react-visual-components/issues"
+    "url": "https://github.com/iamwjun/react-visual-components/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iplash/react-visual-components"
+    "url": "https://github.com/iamwjun/react-visual-components"
   },
   "scripts": {
     "start": "dumi dev",
