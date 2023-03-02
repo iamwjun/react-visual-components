@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import styles from './index.less';
+import * as styles from "./index.module.less";
 
 interface ContextmenuProps {
   targetId: string;
@@ -9,10 +9,12 @@ interface ContextmenuProps {
 
 const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
   const contextRef = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState<Pick<React.CSSProperties, 'top' | 'left' | 'visibility'>>({
+  const [offset, setOffset] = useState<
+    Pick<React.CSSProperties, "top" | "left" | "visibility">
+  >({
     top: 0,
     left: 0,
-    visibility: 'hidden',
+    visibility: "hidden",
   });
 
   const handleKeyDown = useCallback(
@@ -24,13 +26,13 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
       // 获取shift 键对应的事件属性
       const shiftKeyCode = event.shiftKey;
       if (keyCode === 83 && ctrlKeyCode && shiftKeyCode) {
-        const com = menus.filter(({ label }) => label === 'Setting');
+        const com = menus.filter(({ label }) => label === "Setting");
         if (com.length && com[0].command) {
           com[0].command();
         }
       }
     },
-    [menus],
+    [menus]
   );
 
   const handleKeyUp = useCallback((event: { key: any }) => {
@@ -39,12 +41,12 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('keyup', handleKeyUp);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('keyup', handleKeyUp);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
     };
   });
 
@@ -65,24 +67,33 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
         setOffset({
           top: offsetY + 15,
           left: offsetX + 25,
-          visibility: 'visible',
+          visibility: "visible",
         });
-      } else if (contextRef.current && !contextRef.current.contains(event.target)) {
-        setOffset({ top: 0, left: 0, visibility: 'hidden' });
+      } else if (
+        contextRef.current &&
+        !contextRef.current.contains(event.target)
+      ) {
+        setOffset({ top: 0, left: 0, visibility: "hidden" });
       }
     };
 
     const offClickHandler = (event: { target: Node | null }) => {
       if (contextRef.current && !contextRef.current.contains(event.target)) {
-        setOffset({ top: 0, left: 0, visibility: 'hidden' });
+        setOffset({ top: 0, left: 0, visibility: "hidden" });
       }
     };
 
-    document.addEventListener('contextmenu', contextMenuEventHandler as EventListener);
-    document.addEventListener('click', offClickHandler as EventListener);
+    document.addEventListener(
+      "contextmenu",
+      contextMenuEventHandler as EventListener
+    );
+    document.addEventListener("click", offClickHandler as EventListener);
     return () => {
-      document.removeEventListener('contextmenu', contextMenuEventHandler as EventListener);
-      document.removeEventListener('click', offClickHandler as EventListener);
+      document.removeEventListener(
+        "contextmenu",
+        contextMenuEventHandler as EventListener
+      );
+      document.removeEventListener("click", offClickHandler as EventListener);
     };
   }, [targetId]);
 
@@ -93,12 +104,12 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
           key={label}
           className={styles.item}
           onClick={() => {
-            setOffset({ top: 0, left: 0, visibility: 'hidden' });
+            setOffset({ top: 0, left: 0, visibility: "hidden" });
             if (command) command();
           }}
         >
           <span>{label}</span>
-          <span>{key.join(' ')}</span>
+          <span>{key.join(" ")}</span>
         </div>
       ))}
     </div>
