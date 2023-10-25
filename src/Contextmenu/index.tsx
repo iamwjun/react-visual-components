@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import * as styles from "./index.module.less";
+import styles from "./index.module.less";
 
 interface ContextmenuProps {
   targetId: string;
@@ -11,11 +11,7 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
   const contextRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState<
     Pick<React.CSSProperties, "top" | "left" | "visibility">
-  >({
-    top: 0,
-    left: 0,
-    visibility: "hidden",
-  });
+  >({ top: 0, left: 0, visibility: "hidden" });
 
   const handleKeyDown = useCallback(
     (event: any) => {
@@ -31,6 +27,12 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
           com[0].command();
         }
       }
+      if (keyCode === 67 && ctrlKeyCode) {
+        console.log("copy");
+      }
+      if (keyCode === 86 && ctrlKeyCode) {
+        console.log("paste");
+      }
     },
     [menus]
   );
@@ -40,13 +42,32 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
     const { key } = event;
   }, []);
 
+  const handleMouseDown = useCallback(
+    (event: any) => {
+      const targetElement = document.getElementById(targetId);
+      if (
+        event.button === 0 &&
+        offset.visibility === "visible" &&
+        targetElement &&
+        !targetElement.contains(event.target)
+      ) {
+        console.log("里面");
+      } else {
+        setOffset({ top: 0, left: 0, visibility: "hidden" });
+      }
+    },
+    [offset.visibility, targetId]
+  );
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
+    document.addEventListener("mousedown", handleMouseDown);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
+      document.removeEventListener("mousedown", handleMouseDown);
     };
   });
 
@@ -62,11 +83,12 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
       const targetElement = document.getElementById(targetId);
       if (targetElement && targetElement.contains(event.target)) {
         event?.preventDefault();
-        const { offsetX = 0, offsetY = 0, clientX, clientY } = event;
-        console.log(clientX, clientY, event);
+        const container = document.getElementById("container");
+        const { x = 0, y = 0 } = container?.getClientRects()[0] || {};
+        const { clientX = 0, clientY = 0 } = event;
         setOffset({
-          top: offsetY + 15,
-          left: offsetX + 25,
+          top: clientY - y + 15,
+          left: clientX - x + 25,
           visibility: "visible",
         });
       } else if (
