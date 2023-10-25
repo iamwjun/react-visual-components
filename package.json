@@ -3,7 +3,7 @@
   "name": "react-visual-components",
   "author": "iamwjun",
   "homepage": "https://iamwjun.github.io/",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "keywords": [
     "component",
     "components",
@@ -39,7 +39,8 @@
     "pre-commit": "lint-staged"
   },
   "files": [
-    "dist"
+    "dist",
+    "example.png"
   ],
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [

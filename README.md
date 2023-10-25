@@ -54,7 +54,7 @@ export default () => {
 
 Example
 
-![alt text](./example.png)
+![visual example](./example.png)
 
 Experience
 
