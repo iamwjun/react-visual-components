@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import styles from "./index.module.less";
+import "./index.less";
 
 interface ContextmenuProps {
   targetId: string;
@@ -120,11 +120,11 @@ const Contextmenu: React.FC<ContextmenuProps> = ({ targetId, menus = [] }) => {
   }, [targetId]);
 
   return (
-    <div ref={contextRef} className={styles.menu} style={offset}>
+    <div ref={contextRef} className="contextmenu" style={offset}>
       {menus.map(({ label, key, command }) => (
         <div
           key={label}
-          className={styles.item}
+          className="contextmenu-item"
           onClick={() => {
             setOffset({ top: 0, left: 0, visibility: "hidden" });
             if (command) command();
